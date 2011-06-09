@@ -35,13 +35,13 @@ public class RemoteCOM implements JSCOM{
 	public JSVariant call(String methodName, Object arg1, Object arg2, Object arg3, Object arg4, Object arg5, Object arg6, Object arg7, Object arg8, Object arg9, Object arg10, Object arg11, Object arg12) throws RemoteException { 
 		try{
 			if(arg12 != null)
-				return new JSVariant(Dispatch.call(axo, methodName, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12));
+				return new JSVariant(Dispatch.call(axo, methodName, new Object[]{arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12}));
 			if(arg11 != null)
-				return new JSVariant(Dispatch.call(axo, methodName, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11));
+				return new JSVariant(Dispatch.call(axo, methodName, new Object[]{arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11}));
 			if(arg10 != null)
-				return new JSVariant(Dispatch.call(axo, methodName, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10));
+				return new JSVariant(Dispatch.call(axo, methodName, new Object[]{arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10}));
 			if(arg9 != null)
-				return new JSVariant(Dispatch.call(axo, methodName, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9));
+				return new JSVariant(Dispatch.call(axo, methodName, new Object[]{arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9}));
 			if(arg8 != null)
 				return new JSVariant(Dispatch.call(axo, methodName, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8));
 			else if(arg7 != null)
