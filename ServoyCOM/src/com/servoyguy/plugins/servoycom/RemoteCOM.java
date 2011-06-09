@@ -20,6 +20,16 @@ public class RemoteCOM implements JSCOM{
 			lastError = e.toString();
 		}
 	}
+	
+	public RemoteCOM(Dispatch _axo){
+		try{
+			axo = _axo;
+		}
+		catch(Exception e){
+			lastError = e.toString();
+		}
+	}
+	
 	@Override
 	public JSVariant call(String methodName, Object[] args) throws RemoteException {
 		try{
@@ -124,6 +134,16 @@ public class RemoteCOM implements JSCOM{
 	public Object get(String key) throws RemoteException { 
 		try{
 			return Dispatch.get(axo, key);
+		}
+		catch(Exception e){
+			lastError = e.toString();
+			return null;
+		}
+	}
+	
+	public JSCOM getChildJSCOM(String key) throws RemoteException {
+		try{
+			return new RemoteCOM(Dispatch.get(axo, key).toDispatch());
 		}
 		catch(Exception e){
 			lastError = e.toString();
