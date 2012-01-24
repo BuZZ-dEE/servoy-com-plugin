@@ -7,6 +7,7 @@ import com.jacob.com.Variant;
 public class JSVariant implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	
 	private String stringValue;
 	private boolean isString = false;
 	private double doubleValue;

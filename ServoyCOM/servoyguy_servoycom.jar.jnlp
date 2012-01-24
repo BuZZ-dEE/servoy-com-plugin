@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0+"
+      codebase="%%serverURL%%"
+      href="/servoy-client/plugins/servoyguy_servoycom.jar.jnlp">
+   <information> 
+      <title>ServoyGuy ServoyCOM Plug-in</title> 
+      <vendor>ServoyGuy</vendor>
+      <offline-allowed/>
+   </information>
+   <resources>
+      <jar href="/plugins/servoyguy_servoycom.jar" download="eager" version="1.1"/>
+      <jar href="/plugins/servoyguy_servoycom/jacob.jar" download="%%loadmethod%%" version="1.16-M1"/>
+   </resources>
+   <component-desc/>
+</jnlp>

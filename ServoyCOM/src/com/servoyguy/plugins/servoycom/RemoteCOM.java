@@ -6,7 +6,7 @@ import com.jacob.com.Dispatch;
 import com.jacob.activeX.ActiveXComponent;
 import com.jacob.com.ComThread;
 
-public class RemoteCOM implements JSCOM{
+public class RemoteCOM implements JSCOM {
 
 	private String lastError;
 	private Dispatch axo;
@@ -58,7 +58,7 @@ public class RemoteCOM implements JSCOM{
 				return new JSVariant(Dispatch.call(axo, methodName, arg1, arg2, arg3, arg4, arg5, arg6, arg7));
 			else if(arg6 != null)
 				return new JSVariant(Dispatch.call(axo, methodName, arg1, arg2, arg3, arg4, arg5, arg6));
-			else if(arg6 != null)
+			else if(arg5 != null)
 				return new JSVariant(Dispatch.call(axo, methodName, arg1, arg2, arg3, arg4, arg5));
 			else if(arg4 != null)
 				return new JSVariant(Dispatch.call(axo, methodName, arg1, arg2, arg3, arg4));

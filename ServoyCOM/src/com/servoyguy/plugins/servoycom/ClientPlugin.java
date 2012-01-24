@@ -1,6 +1,7 @@
 package com.servoyguy.plugins.servoycom;
 
 import java.beans.PropertyChangeEvent;
+import java.net.URL;
 import java.util.Properties;
 
 import javax.swing.Icon;
@@ -22,20 +23,16 @@ public class ClientPlugin  implements IClientPlugin{
 		application = app;
 	}
 	
-	IClientPluginAccess getIClientPluginAccess()
-	{
+	IClientPluginAccess getIClientPluginAccess() {
 		return application;
 	}
 	
 	public Icon getImage() {
 		//return null;
-		java.net.URL iconUrl = this.getClass().getResource("images/dll.gif"); //$NON-NLS-1$
-		if (iconUrl != null)
-		{
+		URL iconUrl = this.getClass().getResource("images/dll.gif"); //$NON-NLS-1$
+		if (iconUrl != null) {
 			return new ImageIcon(iconUrl);
-		}
-		else
-		{
+		} else {
 			return null;
 		}
 	}
@@ -49,10 +46,9 @@ public class ClientPlugin  implements IClientPlugin{
 	}
 
 	public IScriptObject getScriptObject() {
-		if(iso == null){
+		if (iso == null){
 			iso = new ClientScriptObject(this);
 		}
-		
 		return iso;
 	}
 
@@ -65,6 +61,7 @@ public class ClientPlugin  implements IClientPlugin{
 
 	public void unload() throws PluginException {
 		application = null;
+		iso = null;
 	}
 
 	public void propertyChange(PropertyChangeEvent arg0) {
