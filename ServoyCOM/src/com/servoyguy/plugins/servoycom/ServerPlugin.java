@@ -15,10 +15,10 @@ public class ServerPlugin  implements IServerPlugin{
 	private IServerAccess application;
 	private String lastError;
 	
-	public void registerServerCom(String progID) throws Exception {
+	public void registerServerCom(final String progID) throws Exception {
 		//make sure Jacob dll is loaded
 		if (JacobUtils.isJacobInstalled()){
-			RemoteCOM myCOM = new RemoteCOM(progID);
+			final RemoteCOM myCOM = new RemoteCOM(progID);
 			if (myCOM.isJACOBLoaded()){
 				application.registerRMIService(progID,myCOM);
 			}
@@ -42,7 +42,6 @@ public class ServerPlugin  implements IServerPlugin{
 	    final String libs = (String)application.getSettings().get("com.servoyguy.plugins.servoycom.serverLibraries");
 	    Debug.log("Loading Com libs: " + libs);	    
 	    if (libs != null) {
-	    	
 	    	final String[] libArray = libs.split(",");
 	    	for (int i = 0; i < libArray.length; i++) {
 	    		Debug.log("Binding lib: " + libArray[i] + "...");	    		

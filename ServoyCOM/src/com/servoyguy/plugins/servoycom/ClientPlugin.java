@@ -14,6 +14,7 @@ import com.servoy.j2db.preference.PreferencePanel;
 import com.servoy.j2db.scripting.IScriptObject;
 
 public class ClientPlugin  implements IClientPlugin{
+	
 	private static final String PLUGIN_NAME = "servoyguy_servoycom";
 
 	private IClientPluginAccess application;
@@ -28,8 +29,7 @@ public class ClientPlugin  implements IClientPlugin{
 	}
 	
 	public Icon getImage() {
-		//return null;
-		URL iconUrl = this.getClass().getResource("images/dll.gif"); //$NON-NLS-1$
+		final URL iconUrl = this.getClass().getResource("images/dll.gif");
 		if (iconUrl != null) {
 			return new ImageIcon(iconUrl);
 		} else {

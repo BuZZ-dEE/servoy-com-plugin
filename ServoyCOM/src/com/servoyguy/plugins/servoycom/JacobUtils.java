@@ -71,8 +71,8 @@ public class JacobUtils {
 
 			final File newDLL = new File(servoyDir, DLLName);
 			if (!newDLL.exists()) {
-				InputStream in = JacobUtils.class.getResourceAsStream("ressources/" + DLLName);
-				OutputStream out = new FileOutputStream(newDLL);
+				final InputStream in = JacobUtils.class.getResourceAsStream("resources/" + DLLName);
+				final OutputStream out = new FileOutputStream(newDLL);
 				streamAndClose(in, out);
 			}
 			return true;
@@ -99,7 +99,7 @@ public class JacobUtils {
 		}
 	}
  
-	public static void stream(InputStream in, OutputStream out) throws IOException {
+	public static void stream(final InputStream in, final OutputStream out) throws IOException {
         // Copy the input stream to the output stream
 		final byte buffer[] = new byte[BUFFER_SIZE];
 		int len = buffer.length;

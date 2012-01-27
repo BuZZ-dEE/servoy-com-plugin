@@ -1,175 +1,176 @@
 package com.servoyguy.plugins.servoycom;
 
-import java.rmi.RemoteException;
-
 import com.jacob.com.Dispatch;
 import com.jacob.activeX.ActiveXComponent;
 import com.jacob.com.ComThread;
 
 public class RemoteCOM implements JSCOM {
 
+	private final Dispatch axo;
 	private String lastError;
-	private Dispatch axo;
 	
-	public RemoteCOM(String componentName){
+	public RemoteCOM(final String componentName){
+		ActiveXComponent axc = null;
 		try{
-			ActiveXComponent axc = new ActiveXComponent(componentName);
-			axo = axc.getObject();
+			axc = new ActiveXComponent(componentName);
 		}
-		catch(Exception e){
+		catch(final Exception e){
 			lastError = e.toString();
 		}
+		this.axo = (axc != null) ? axc.getObject() : null;
 	}
 	
-	public RemoteCOM(Dispatch _axo){
-		try{
-			axo = _axo;
-		}
-		catch(Exception e){
-			lastError = e.toString();
-		}
+	public RemoteCOM(final Dispatch _axo){
+		this.axo = _axo;
 	}
 	
 	@Override
-	public JSVariant call(String methodName, Object[] args) throws RemoteException {
+	public JSVariant call(final String methodName, final Object[] args) {
 		try{
-//			return new JSVariant(Dispatch.call(axo, methodName, args));
 			return new JSVariant(Dispatch.callN(axo, methodName, args));
 		}
-		catch(Exception e){
+		catch(final Exception e){
 			lastError = e.toString();
 			return null;
 		}
 	}
 	@Override
-	public JSVariant call(String methodName, Object arg1, Object arg2, Object arg3, Object arg4, Object arg5, Object arg6, Object arg7, Object arg8, Object arg9, Object arg10, Object arg11, Object arg12) throws RemoteException { 
-		try{
-			if(arg12 != null)
-				return new JSVariant(Dispatch.call(axo, methodName, new Object[]{arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12}));
-			if(arg11 != null)
-				return new JSVariant(Dispatch.call(axo, methodName, new Object[]{arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11}));
-			if(arg10 != null)
-				return new JSVariant(Dispatch.call(axo, methodName, new Object[]{arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10}));
-			if(arg9 != null)
-				return new JSVariant(Dispatch.call(axo, methodName, new Object[]{arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9}));
-			if(arg8 != null)
-				return new JSVariant(Dispatch.call(axo, methodName, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8));
-			else if(arg7 != null)
-				return new JSVariant(Dispatch.call(axo, methodName, arg1, arg2, arg3, arg4, arg5, arg6, arg7));
-			else if(arg6 != null)
-				return new JSVariant(Dispatch.call(axo, methodName, arg1, arg2, arg3, arg4, arg5, arg6));
-			else if(arg5 != null)
-				return new JSVariant(Dispatch.call(axo, methodName, arg1, arg2, arg3, arg4, arg5));
-			else if(arg4 != null)
-				return new JSVariant(Dispatch.call(axo, methodName, arg1, arg2, arg3, arg4));
-			else if(arg3 != null)
-				return new JSVariant(Dispatch.call(axo, methodName, arg1, arg2, arg3));
-			else if(arg2 != null)
-				return new JSVariant(Dispatch.call(axo, methodName, arg1, arg2));
-			else if(arg1 != null)
-				return new JSVariant(Dispatch.call(axo, methodName, arg1));
-			else
-				return new JSVariant(Dispatch.call(axo, methodName));
+	public JSVariant call(final String methodName, Object arg1, Object arg2, Object arg3, Object arg4, Object arg5, Object arg6, Object arg7, Object arg8, Object arg9, Object arg10, Object arg11, Object arg12) { 
+		if (axo != null) {
+			try{
+				if(arg12 != null)
+					return new JSVariant(Dispatch.call(axo, methodName, new Object[]{arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12}));
+				if(arg11 != null)
+					return new JSVariant(Dispatch.call(axo, methodName, new Object[]{arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11}));
+				if(arg10 != null)
+					return new JSVariant(Dispatch.call(axo, methodName, new Object[]{arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10}));
+				if(arg9 != null)
+					return new JSVariant(Dispatch.call(axo, methodName, new Object[]{arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9}));
+				if(arg8 != null)
+					return new JSVariant(Dispatch.call(axo, methodName, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8));
+				else if(arg7 != null)
+					return new JSVariant(Dispatch.call(axo, methodName, arg1, arg2, arg3, arg4, arg5, arg6, arg7));
+				else if(arg6 != null)
+					return new JSVariant(Dispatch.call(axo, methodName, arg1, arg2, arg3, arg4, arg5, arg6));
+				else if(arg5 != null)
+					return new JSVariant(Dispatch.call(axo, methodName, arg1, arg2, arg3, arg4, arg5));
+				else if(arg4 != null)
+					return new JSVariant(Dispatch.call(axo, methodName, arg1, arg2, arg3, arg4));
+				else if(arg3 != null)
+					return new JSVariant(Dispatch.call(axo, methodName, arg1, arg2, arg3));
+				else if(arg2 != null)
+					return new JSVariant(Dispatch.call(axo, methodName, arg1, arg2));
+				else if(arg1 != null)
+					return new JSVariant(Dispatch.call(axo, methodName, arg1));
+				else
+					return new JSVariant(Dispatch.call(axo, methodName));
+			}
+			catch(final Exception e){
+				lastError = e.toString();
+			}
 		}
-		catch(Exception e){
-			lastError = e.toString();
-			return null;
-		}
+		return null;
 	}
 	
-	public JSVariant call(String methodName, Object arg1, Object arg2, Object arg3, Object arg4, Object arg5, Object arg6, Object arg7, Object arg8, Object arg9, Object arg10, Object arg11) throws RemoteException { 
+	public JSVariant call(String methodName, Object arg1, Object arg2, Object arg3, Object arg4, Object arg5, Object arg6, Object arg7, Object arg8, Object arg9, Object arg10, Object arg11) { 
 		return call(methodName, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, null);
 	}
-	public JSVariant call(String methodName, Object arg1, Object arg2, Object arg3, Object arg4, Object arg5, Object arg6, Object arg7, Object arg8, Object arg9, Object arg10) throws RemoteException { 
+	public JSVariant call(String methodName, Object arg1, Object arg2, Object arg3, Object arg4, Object arg5, Object arg6, Object arg7, Object arg8, Object arg9, Object arg10) { 
 		return call(methodName, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, null, null);
 	}
-	public JSVariant call(String methodName, Object arg1, Object arg2, Object arg3, Object arg4, Object arg5, Object arg6, Object arg7, Object arg8, Object arg9) throws RemoteException { 
+	public JSVariant call(String methodName, Object arg1, Object arg2, Object arg3, Object arg4, Object arg5, Object arg6, Object arg7, Object arg8, Object arg9) { 
 		return call(methodName, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, null, null, null);
 	}
-	public JSVariant call(String methodName, Object arg1, Object arg2, Object arg3, Object arg4, Object arg5, Object arg6, Object arg7, Object arg8) throws RemoteException { 
+	public JSVariant call(String methodName, Object arg1, Object arg2, Object arg3, Object arg4, Object arg5, Object arg6, Object arg7, Object arg8) { 
 		return call(methodName, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, null, null, null, null);
 	}
 	
-	public JSVariant call(String methodName, Object arg1, Object arg2, Object arg3, Object arg4, Object arg5, Object arg6, Object arg7) throws RemoteException { 
+	public JSVariant call(String methodName, Object arg1, Object arg2, Object arg3, Object arg4, Object arg5, Object arg6, Object arg7) { 
 		return call(methodName, arg1, arg2, arg3, arg4, arg5, arg6, arg7, null, null, null, null, null);
 	}
 	
-	public JSVariant call(String methodName, Object arg1, Object arg2, Object arg3, Object arg4, Object arg5, Object arg6) throws RemoteException { 
+	public JSVariant call(String methodName, Object arg1, Object arg2, Object arg3, Object arg4, Object arg5, Object arg6) { 
 		return call(methodName, arg1, arg2, arg3, arg4, arg5, arg6, null, null, null, null, null, null);
 	}
 	
-	public JSVariant call(String methodName, Object arg1, Object arg2, Object arg3, Object arg4, Object arg5) throws RemoteException { 
+	public JSVariant call(String methodName, Object arg1, Object arg2, Object arg3, Object arg4, Object arg5) { 
 		return call(methodName, arg1, arg2, arg3, arg4, arg5, null, null, null, null, null, null, null);
 	}
 	
-	public JSVariant call(String methodName, Object arg1, Object arg2, Object arg3, Object arg4) throws RemoteException { 
+	public JSVariant call(String methodName, Object arg1, Object arg2, Object arg3, Object arg4) { 
 		return call(methodName, arg1, arg2, arg3, arg4, null, null, null, null, null, null, null, null);
 	}
 	
-	public JSVariant call(String methodName, Object arg1, Object arg2, Object arg3) throws RemoteException { 
+	public JSVariant call(String methodName, Object arg1, Object arg2, Object arg3) { 
 		return call(methodName, arg1, arg2, arg3, null, null, null, null, null, null, null, null, null);
 	}
-	public JSVariant call(String methodName, Object arg1, Object arg2) throws RemoteException { 
+	public JSVariant call(String methodName, Object arg1, Object arg2) { 
 		return call(methodName, arg1, arg2, null, null, null, null, null, null, null, null, null, null);
 	}
 	
-	public JSVariant call(String methodName, Object arg1) throws RemoteException { 
+	public JSVariant call(String methodName, Object arg1) { 
 		return call(methodName, arg1, null, null, null, null, null, null, null);
 	}
 	
-	public JSVariant call(String methodName) throws RemoteException { 
+	public JSVariant call(final String methodName) { 
 		return call(methodName);
 	}
 
 	
-	public void put(String key, Object value) throws RemoteException { 
-		try{
-			Dispatch.put(axo, key, value);
-		}
-		catch(Exception e){
-			lastError = e.toString();
-		}
-	}
-	
-	public Object get(String key) throws RemoteException { 
-		try{
-			return Dispatch.get(axo, key);
-		}
-		catch(Exception e){
-			lastError = e.toString();
-			return null;
+	public void put(final String key, final Object value) { 
+		if (axo != null) {
+			try{
+				Dispatch.put(axo, key, value);
+			}
+			catch(final Exception e){
+				lastError = e.toString();
+			}
 		}
 	}
 	
-	public JSCOM getChildJSCOM(String key) throws RemoteException {
-		try{
-			return new RemoteCOM(Dispatch.get(axo, key).toDispatch());
+	public Object get(final String key) { 
+		if (axo != null) {
+			try{
+				return Dispatch.get(axo, key);
+			}
+			catch(final Exception e){
+				lastError = e.toString();
+			}
 		}
-		catch(Exception e){
-			lastError = e.toString();
-			return null;
-		}
+		return null;
 	}
 	
-	public String getLastError() throws RemoteException { 
+	public JSCOM getChildJSCOM(String key) {
+		if (axo != null) {
+			try{
+				return new RemoteCOM(Dispatch.get(axo, key).toDispatch());
+			}
+			catch(final Exception e){
+				lastError = e.toString();
+				return null;
+			}
+		}
+		return null;
+	}
+	
+	public String getLastError() { 
 		return lastError;
 	}
 	
-	public boolean isJACOBLoaded() throws RemoteException { 
+	public boolean isJACOBLoaded() { 
 		return axo != null;
 	}
 	
-	public boolean release() throws RemoteException { 
+	public boolean release() { 
 		try{
-			axo.safeRelease();
+			if (axo != null) axo.safeRelease();
 			ComThread.Release();
 			ComThread.quitMainSTA();
-			axo = null;
 			return true;
 		}
-		catch(Exception e){
+		catch(final Exception e){
 			lastError = e.toString();
-			return false;
 		}
+		return false;
 	}
 }

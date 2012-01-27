@@ -21,10 +21,10 @@ public class JSVariant implements Serializable {
 	private boolean isDate = false;
 	private boolean isNull = false;
 	
-	public JSVariant(Object o){
+	public JSVariant(final Object o){
 		
 		//	should always cast : put in here for reflection
-		Variant v = (Variant)o;
+		final Variant v = (Variant)o;
 		
 		if(v.isNull()){
 			isNull = true;
@@ -34,27 +34,27 @@ public class JSVariant implements Serializable {
 		try{
 			stringValue = v.toString();
 			isString = true;
-		}catch(Throwable t){}
+		}catch(final Throwable t){}
 		
 		try{
 			doubleValue = v.changeType(Variant.VariantDouble).getDouble();
 			isDouble = true;
-		}catch(Throwable t){}
+		}catch(final Throwable t){}
 		
 		try{
 			intValue = v.changeType(Variant.VariantInt).getInt();
 			isInt = true;
-		}catch(Throwable t){}
+		}catch(final Throwable t){}
 		
 		try{
 			booleanValue = v.changeType(Variant.VariantBoolean).getBoolean();
 			isBoolean = true;
-		}catch(Throwable t){}
+		}catch(final Throwable t){}
 		
 		try{
 			dateValue = v.changeType(Variant.VariantDate).getDate();
 			isBoolean = true;
-		}catch(Throwable t){}
+		}catch(final Throwable t){}
 	}
 
 	public String getString() {
