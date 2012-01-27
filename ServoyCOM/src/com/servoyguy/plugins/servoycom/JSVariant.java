@@ -1,6 +1,7 @@
 package com.servoyguy.plugins.servoycom;
 
 import java.io.Serializable;
+import java.text.DateFormat;
 
 import com.jacob.com.Variant;
 
@@ -98,5 +99,22 @@ public class JSVariant implements Serializable {
 		}else {
 			throw new IllegalStateException("Cannot convert result to boolean");
 		}
+	}
+	
+	public String toString() {
+		if (!isNull) {
+			if (isString) {
+				return stringValue;
+			} else if (isInt) {
+				return "" + intValue;
+			} else if (isDouble) {
+				return "" + doubleValue;
+			} else if (isBoolean) {
+				return "" + booleanValue;
+			} else if (isDate) {
+				return DateFormat.getInstance().format(dateValue);
+			}
+		}
+		return null;
 	}
 }

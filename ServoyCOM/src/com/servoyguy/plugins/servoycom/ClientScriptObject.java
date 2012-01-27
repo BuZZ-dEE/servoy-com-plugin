@@ -6,7 +6,7 @@ import com.servoy.j2db.scripting.IScriptObject;
 
 public class ClientScriptObject implements IScriptObject {
 	
-	private static final String VERSION = "1.1";
+	private static final String VERSION = "1.1.1";
 	
 	private final ClientPlugin plugin;
 	private String lastError;

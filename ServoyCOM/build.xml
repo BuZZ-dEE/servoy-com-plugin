@@ -47,6 +47,7 @@
 	</target>
 	
 	<target name="run" depends="jar">
+		<copy file="misc/ServoyGuy_ServoyCOM.servoy" todir="${dist}"/>
 		<zip destfile="ServoyGuy_ServoyCOM-v${version}.zip">
 			<fileset dir="${dist}"/>
 		</zip>
