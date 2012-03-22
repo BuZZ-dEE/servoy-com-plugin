@@ -153,6 +153,19 @@ public class RemoteCOM implements JSCOM {
 		return null;
 	}
 	
+	public JSCOM getChildJSCOM(String key, Object[] values) {
+		if (axo != null) {
+			try{
+				return new RemoteCOM(Dispatch.call(axo, key, values).toDispatch());
+			}
+			catch(final Exception e){
+				lastError = e.toString();
+				return null;
+			}
+		}
+		return null;
+	}
+	
 	public String getLastError() { 
 		return lastError;
 	}

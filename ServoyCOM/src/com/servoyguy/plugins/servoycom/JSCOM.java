@@ -51,6 +51,8 @@ public interface JSCOM extends Remote {
 	public Object get(String key) throws RemoteException;	
 	
 	public JSCOM getChildJSCOM(String key) throws RemoteException;
+	
+	public JSCOM getChildJSCOM(String key, Object[] value) throws RemoteException;
 
 	public String getLastError() throws RemoteException;
 
