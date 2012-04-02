@@ -113,7 +113,7 @@ public class RemoteCOM implements JSCOM {
 	}
 	
 	public JSVariant call(final String methodName) { 
-		return call(methodName);
+		return call(methodName, null, null, null, null, null, null, null, null);
 	}
 
 	
