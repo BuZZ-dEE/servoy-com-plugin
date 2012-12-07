@@ -53,7 +53,7 @@ public class JSVariant implements Serializable {
 		
 		try{
 			dateValue = v.changeType(Variant.VariantDate).getDate();
-			isBoolean = true;
+			isDate = true;
 		}catch(final Throwable t){}
 	}
 
