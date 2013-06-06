@@ -2,6 +2,10 @@ package com.servoyguy.plugins.servoycom;
 
 import java.io.Serializable;
 import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 import com.jacob.com.Variant;
 
@@ -89,6 +93,17 @@ public class JSVariant implements Serializable {
 		}
 	}
 
+	public Date getFormattedDate(){
+		SimpleDateFormat sdf = new SimpleDateFormat( "EEE MMM dd HH:mm:ss Z yyyy", Locale.ENGLISH );
+		try 
+		{
+			return sdf.parse( stringValue );
+		} catch (ParseException e) {
+			e.printStackTrace();
+			return null;
+		}		
+	}
+	
 	public boolean isNull() {
 		return isNull;
 	}

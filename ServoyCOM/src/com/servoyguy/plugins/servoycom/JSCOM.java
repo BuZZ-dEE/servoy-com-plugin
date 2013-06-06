@@ -3,6 +3,8 @@ package com.servoyguy.plugins.servoycom;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
+import com.jacob.activeX.ActiveXComponent;
+
 public interface JSCOM extends Remote {
 
 	public JSVariant call(String methodName, Object[] args) throws RemoteException;
@@ -53,7 +55,11 @@ public interface JSCOM extends Remote {
 	public JSCOM getChildJSCOM(String key) throws RemoteException;
 	
 	public JSCOM getChildJSCOM(String key, Object[] value) throws RemoteException;
+	
+	public JSCOM getChildJSCOM(String key,String progID, Object[] values) throws RemoteException;
 
+	public ActiveXComponent getActiveXComponent();
+	
 	public String getLastError() throws RemoteException;
 
 	public boolean isJACOBLoaded() throws RemoteException;

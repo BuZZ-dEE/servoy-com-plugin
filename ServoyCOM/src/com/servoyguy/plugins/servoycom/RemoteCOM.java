@@ -6,11 +6,12 @@ import com.jacob.com.ComThread;
 
 public class RemoteCOM implements JSCOM {
 
-	private final Dispatch axo;
+	private final Dispatch axo;	
+	private ActiveXComponent axc;
 	private String lastError;
 	
 	public RemoteCOM(final String componentName){
-		ActiveXComponent axc = null;
+		axc = null;
 		try{
 			axc = new ActiveXComponent(componentName);
 		}
@@ -21,9 +22,20 @@ public class RemoteCOM implements JSCOM {
 	}
 	
 	public RemoteCOM(final Dispatch _axo){
+		this.axo = _axo;		
+	}
+
+	public RemoteCOM(final String componentName,final Dispatch _axo){
+		this.axc = null;		
+		try{
+			this.axc = new ActiveXComponent(componentName);			
+		}
+		catch(final Exception e){
+			lastError = e.toString();
+		}
 		this.axo = _axo;
 	}
-	
+		
 	@Override
 	public JSVariant call(final String methodName, final Object[] args) {
 		try{
@@ -114,8 +126,7 @@ public class RemoteCOM implements JSCOM {
 	
 	public JSVariant call(final String methodName) { 
 		return call(methodName, null, null, null, null, null, null, null, null);
-	}
-
+	}	
 	
 	public void put(final String key, final Object value) { 
 		if (axo != null) {
@@ -154,9 +165,10 @@ public class RemoteCOM implements JSCOM {
 	}
 	
 	public JSCOM getChildJSCOM(String key, Object[] values) {
-		if (axo != null) {
+		if (axo != null) 
+		{
 			try{
-				return new RemoteCOM(Dispatch.call(axo, key, values).toDispatch());
+				return new RemoteCOM(Dispatch.call(axo, key, values).toDispatch());				
 			}
 			catch(final Exception e){
 				lastError = e.toString();
@@ -164,6 +176,28 @@ public class RemoteCOM implements JSCOM {
 			}
 		}
 		return null;
+	}
+
+	public JSCOM getChildJSCOM(String key,String progID, Object[] values) {
+		if (axo != null) 
+		{
+			try{
+				return new RemoteCOM(progID,Dispatch.call(axo, key, values).toDispatch());				
+			}
+			catch(final Exception e){
+				lastError = e.toString();
+				return null;
+			}
+		}
+		return null;
+	}
+		
+	public ActiveXComponent getActiveXComponent(){
+		return axc;
+	}
+	
+	public Dispatch getDispatch(){
+		return axo;
 	}
 	
 	public String getLastError() { 
