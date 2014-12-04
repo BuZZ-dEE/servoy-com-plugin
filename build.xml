@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="servoyguy_servoycom" default="run" basedir=".">
+	
+	<!-- set global properties for this build -->
+	<property file="build.properties"/>
+	<property name="project_name" value="${ant.project.name}"/>
+	<property name="src" value="src"/>
+	<property name="dist" value="dist"/>
+	<property name="lib" value="lib"/>
+	<property name="build" value="bin"/>
+	<property name="jar" value="${ant.project.name}.jar"/>
+
+	<property name="servoy_plugins" value="plugins\"/>
+	<property name="servoy_lib" value="lib\"/>
+	<property name="servoy_server" value="${servoy}server\"/>
+
+	<taskdef name="pack200" classname="com.sun.tools.apache.ant.pack200.Pack200Task" classpath="misc/Pack200Task.jar"/> 
+	
+	<target name="init">
+		<mkdir dir="${dist}"/>
+		<mkdir dir="${dist}/plugins"/>
+		<mkdir dir="${dist}/plugins/${project_name}"/>
+	</target>
+	
+	<target name="packsign">
+		<pack200 src="${file}" destfile="${file}.tmp1.jar" repack="true" keepfileorder="true"/> 
+		<signjar keystore="${sign.keystore}" jar="${file}.tmp1.jar" alias="${sign.alias}" storepass="${sign.storepass}" />
+		<pack200 src="${file}.tmp1.jar" destfile="${file}" repack="true" keepfileorder="true"/> 
+		<signjar keystore="${sign.keystore}" jar="${file}" alias="${sign.alias}" storepass="${sign.storepass}" />
+		<delete file="${file}.tmp1.jar"/>	
+	</target>
+	
+	<target name="nopacksign">
+		<!-- does nothing -->
+	</target>
+
+	<target name="jar" depends="init">
+		<jar jarfile="${dist}/plugins/${jar}" basedir="${build}/"/>
+		<antcall target="${process}"> 
+			<param name="file" value="${dist}/plugins/${jar}"/>
+		</antcall>
+		<copy file="${jar}.jnlp" todir="${dist}/plugins" overwrite="true"/>
+		<copy file="${lib}/jacob.jar" todir="${dist}/plugins/${project_name}"/>
+		<antcall target="${process}"> 
+			<param name="file" value="${dist}/plugins/${project_name}/jacob.jar"/>
+		</antcall>
+	</target>
+	
+	<target name="run" depends="jar">
+		<copy file="misc/ServoyGuy_ServoyCOM.servoy" todir="${dist}"/>
+		<zip destfile="ServoyGuy_ServoyCOM-v${version}.zip">
+			<fileset dir="${dist}"/>
+		</zip>
+		<copy todir="${servoy}${servoy_plugins}" overwrite="true">
+			<fileset dir="${dist}/plugins"/>
+		</copy>
+		<delete dir="${dist}"/>
+	</target>
+
+</project>
