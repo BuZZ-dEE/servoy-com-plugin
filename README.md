@@ -13,7 +13,9 @@ http://sourceforge.net/projects/jacob-project/
 http://jacob-project.wiki.sourceforge.net/
 
 Build Instructions:
+
 There should be 3 jars generated:
+
 	1. servoyguy_servoycom.jar: should bundle com.servoyguy.plugins.servoycom & com.servoyguy.plugins.servoycom.images
 	2. servoyguy_servoycom/jacob.jar:  the jacob library
 	3. servoyguy_servoycom/windows_native.jar:  should bundle com.servoyguy.plugins.resources
