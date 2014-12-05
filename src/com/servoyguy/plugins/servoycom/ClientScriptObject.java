@@ -7,7 +7,7 @@ import com.servoy.j2db.scripting.IScriptable;
 
 public class ClientScriptObject implements IScriptable, IReturnedTypesProvider {
 	
-	private static final String VERSION = "1.1.4";
+	private static final String VERSION = "1.1.8";
 	
 	private final ClientPlugin plugin;
 	private String lastError;
