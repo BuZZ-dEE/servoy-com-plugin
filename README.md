@@ -9,8 +9,8 @@ Developers must install the `jacob-1.18-M2-x86.dll` into their `C:\WINDOWS\syste
 Developers must also install the Visual C++ runtime at http://download.microsoft.com/download/e/1/c/e1c773de-73ba-494a-a5ba-f24906ecf088/vcredist_x86.exe
 
 Note:  The jacob DLL file bundled with this plugin is the x86 version.  If your system requires 64 bit, you can download from the links below.
-http://sourceforge.net/projects/jacob-project/
-http://jacob-project.wiki.sourceforge.net/
+ - http://sourceforge.net/projects/jacob-project/
+ - http://jacob-project.wiki.sourceforge.net/
 
 Build Instructions:
 
