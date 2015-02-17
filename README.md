@@ -16,7 +16,7 @@ Build Instructions:
 
 There should be 3 jars generated:
 
-	1. `servoyguy_servoycom.jar`: should bundle `com.servoyguy.plugins.servoycom` & `com.servoyguy.plugins.servoycom.images`
-	2. `servoyguy_servoycom/jacob.jar`:  the jacob library
-	3. `servoyguy_servoycom/windows_native.jar`:  should bundle `com.servoyguy.plugins.resources`
+ 1. `servoyguy_servoycom.jar`: should bundle `com.servoyguy.plugins.servoycom` & `com.servoyguy.plugins.servoycom.images`
+ 2. `servoyguy_servoycom/jacob.jar`:  the jacob library
+ 3. `servoyguy_servoycom/windows_native.jar`:  should bundle `com.servoyguy.plugins.resources`
 		Note: the windows_native jar wraps the jacob DLL file so it will get streamed through the JNLP and downloaded to the client. The DLL then gets unwrapped and installed on the client.
